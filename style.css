@@ -24,7 +24,7 @@ h1 {
   color: #4da3ff;
 }
 
-/* DISCORD NOW NORMAL (NOT FIXED POSITION) */
+/* DISCORD */
 .discord {
   margin-top: 10px;
 }
@@ -38,7 +38,7 @@ h1 {
   font-weight: 700;
 }
 
-/* JOIN BUTTON (kept top right like original) */
+/* JOIN BUTTON */
 .join-btn {
   position: fixed;
   top: 15px;
@@ -53,7 +53,7 @@ h1 {
   z-index: 9999;
 }
 
-/* GRID (4 columns restored) */
+/* GRID */
 .games {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -86,43 +86,61 @@ h1 {
   font-size: 18px;
 }
 
-/* EMPTY */
 .game-card.empty {
   opacity: 0.5;
   cursor: default;
 }
 
-/* POPUP */
+/* ========================= */
+/*         POPUP FIX         */
+/* ========================= */
+
 .popup {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
+  display: none;
+  background: black;
+  z-index: 999999;
+}
+
+/* ensures proper stacking context */
+.popup-content {
+  position: relative;
   width: 100%;
   height: 100%;
-  display: none;
-  z-index: 99999; /* 🔥 CRITICAL */
-}
-
-.popup-content {
-  width: 80%;
-  height: 80%;
-  position: relative;
   background: black;
+  z-index: 1000000;
+  overflow: hidden;
 }
 
+/* GAME IFRAME */
 iframe {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   border: none;
+  z-index: 1;
+  transform: translateZ(0);
 }
 
-/* BUTTONS */
+/* ========================= */
+/*     CONTROL BUTTONS       */
+/* ========================= */
+
 .close-btn,
 .fullscreen-btn {
   position: absolute;
   top: 10px;
-  font-size: 30px;
+  font-size: 28px;
   padding: 10px;
+  z-index: 1000001; /* ALWAYS ABOVE GAME */
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  pointer-events: auto;
 }
 
 .close-btn {
@@ -130,9 +148,5 @@ iframe {
 }
 
 .fullscreen-btn {
-  right: 60px;
-}
-
-iframe {
-  transform: translateZ(0);
+  right: 65px;
 }
